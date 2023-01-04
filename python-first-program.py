@@ -1,1 +1,2 @@
-hello from second commit
+print("ok")
+print("Anis")
