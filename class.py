@@ -28,15 +28,30 @@
 # print(dir(Car))
 # #---------------------
 
+# class Car:
+#     name = ""
+#     color = ""
+
+#     def start():
+#         print("Starting the engine")
+
+# # creating a Car object
+# my_car = Car()
+# my_car.name = "Allion"
+# print(my_car.name)
+# my_car.start()
+# ----------------------
+
+#corrected code with self
 class Car:
     name = ""
     color = ""
 
-    def start():
+    def start(self):
         print("Starting the engine")
 
 # creating a Car object
 my_car = Car()
 my_car.name = "Allion"
 print(my_car.name)
-# my_car.start()
+my_car.start()

@@ -1,1 +1,1 @@
-my_car.start()
+self
