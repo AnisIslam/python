@@ -10,7 +10,7 @@
 # print("Color:", Car.color)
 
 # Car.start()
-#---------------------
+# ---------------------
 # class Car:
 #     name = ""
 #     color = ""
@@ -65,7 +65,7 @@
 #     def __init__(self,name,color):
 #         self.name=name
 #         self.color = color
-    
+
 #     def start(self):
 #         print("Starting the engine")
 
@@ -76,10 +76,10 @@
 
 # -----------------------------------------
 
-#creating multiple objects
+# creating multiple objects
 
 class Car:
-    def __init__(self, n, c): #this is a constructor
+    def __init__(self, n, c):  # this is a constructor
         self.name = n
         self.color = c
 
@@ -88,6 +88,7 @@ class Car:
         print("color: ", self.color)
         print("Starting the engine")
         print("----------------------------")
+
 
 my_car1 = Car("Corolla", "White")
 my_car1.start()
