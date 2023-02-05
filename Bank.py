@@ -8,7 +8,7 @@ class Bank:
         return self.balance
     def withdraw (self , amount):
         if amount < self.min_withdraw:
-            return "no money for you"
+            return f"no money for you. Minimum need to take {self.min_withdraw} taka"
         elif amount > self.max_withdraw:
             return f"crosses max limit : {self.max_withdraw}"
         elif amount > self.balance:
@@ -17,5 +17,5 @@ class Bank:
             self.balance = self.balance -amount
             return f"Here is yuor money : {amount}"
 my_bank = Bank(8000)
-reply = my_bank.withdraw(5)
+reply = my_bank.withdraw(1500)
 print(reply)
