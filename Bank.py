@@ -16,6 +16,12 @@ class Bank:
         else:
             self.balance = self.balance -amount
             return f"Here is yuor money : {amount}"
+    def deposit(self, amount):
+        self.balance = self.balance + amount
 my_bank = Bank(8000)
 reply = my_bank.withdraw(1500)
 print(reply)
+print(my_bank.get_balance())
+
+my_bank.deposit(5000)
+print(my_bank.get_balance())
