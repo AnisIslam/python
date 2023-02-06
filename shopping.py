@@ -15,8 +15,9 @@ class Shopper:
         # print(price)
         if amount< price:
             return f'Please give me more {price - amount} taka'
-
-
+        elif amount > price:
+            return f'Here is the items and extra money : {amount - price}'
+        
 shopping = Shopper('Bag')
 shopping.add_to_cart('shirt', 400, 3)
 shopping.add_to_cart('pant', 300, 12)
