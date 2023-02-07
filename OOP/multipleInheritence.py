@@ -8,7 +8,7 @@ class Grade:
         self.grade_name = grade_name
         print('Grade Class init called')
 
-class SportsTeam:
+class Spo rtsTeam:
     def __init__(self, sport_name):
         self.sport = sport_name
         self.team = []
