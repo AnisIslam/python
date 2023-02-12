@@ -15,16 +15,19 @@ class User:
             file.write(f'{email} {pwd_encrypted}')
         file.close()
         print(self.name, 'user created')
+    @staticmethod
+    def log_in(email, password):
+        stored_password = ''
+        with open('users.txt', 'r') as file:
+            lines = file.readlines()
+            for line in lines:
+                if email in line:
+                    # print(line)
+                    stored_password = line.split(' ')[1]
+        file.close()
+        print('Password found', stored_password)
 user1 = User('user 1', 'user1@gmail.com', 'user0pass')
-#     @staticmethod
-#     def log_in(email, password):
-#         stored_password = ''
-#         with open('users.txt', 'r') as file:
-#             lines = file.readlines()
-#             for line in lines:
-#                 if email in line:
-#                     stored_password = line.split(' ')[1]
-#         file.close()
+User.log_in('user1@gmail.com', 'password')
 
 #         hashed_password = hashlib.md5(password.encode()).hexdigest()
 #         if hashed_password == stored_password:
