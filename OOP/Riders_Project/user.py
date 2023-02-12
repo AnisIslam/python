@@ -6,6 +6,7 @@ from random import random, randint
 
 # license_authority = BRTA()
 
+
 class User:
     def __init__(self, name, email, password) -> None:
         self.name = name
@@ -15,6 +16,7 @@ class User:
             file.write(f'{email} {pwd_encrypted}')
         file.close()
         print(self.name, 'user created')
+
     @staticmethod
     def log_in(email, password):
         stored_password = ''
@@ -24,17 +26,19 @@ class User:
                 if email in line:
                     # print(line)
                     stored_password = line.split(' ')[1]
-        file.close()
-        print('Password found', stored_password)
+        hashed_password = hashlib.md5(password.encode()).hexdigest()
+        if hashed_password == stored_password:
+            print('valid user')
+            return True
+        else:
+            print('invalid user')
+            return False
+        # file.close()
+        # print('Password found', stored_password)
 user1 = User('user 1', 'user1@gmail.com', 'user0pass')
-User.log_in('user1@gmail.com', 'password')
+User.log_in('user1@gmail.com', 'user0pass')
 
-#         hashed_password = hashlib.md5(password.encode()).hexdigest()
-#         if hashed_password == stored_password:
-#             print('valid user')
-#             return True
-#         else:
-#             print('invalid user')
+
 #             return False
 #         # print('password found', stored_password)
 
