@@ -1,9 +1,9 @@
 import hashlib
 from random import random, randint
-# from brta import BRTA
+from brta import BRTA
 # from vehicles import Bike, Car, Cng
 # from ride_manager import uber
-# license_authority = BRTA()
+license_authority = BRTA()
 
 
 class User:
@@ -34,8 +34,7 @@ class User:
             return False
         # file.close()
         # print('Password found', stored_password)
-user1 = User('user 1', 'user1@gmail.com', 'user0pass')
-User.log_in('user1@gmail.com', 'user0pass')
+
 
 
 #             return False
@@ -60,21 +59,28 @@ class Rider(User):
     def start_a_trip(self, fare):
         self.balance -= fare
 
-# class Driver(User):
-#     def __init__(self, name, email, password, location, license) -> None:
-#         super().__init__(name, email, password)
-#         self.location = location
-#         self.license = license
-#         self.valid_driver = license_authority.validate_license(email, license)
-#         self.earning = 0
+class Driver(User):
+    def __init__(self, name, email, password, location, license) -> None:
+        super().__init__(name, email, password)
+        self.location = location
+        self.license = license
+        self.valid_driver = license_authority.validate_license(email, license)
+        self.earning = 0
 
-#     def take_driving_test(self):
-#         result = license_authority.take_driving_test(self.email)
-#         if result == False:
-#             print('Sorry you failed, try again')
-#         else: 
-#             self.license = result
-#             self.valid_driver = True
+    def take_driving_test(self):
+        result = license_authority.take_driving_test(self.email)
+        if result == False:
+            print('Sorry WRONG!, try again')
+        else: 
+            self.license = result
+            self.valid_driver = True
+user1 = User('user 1', 'user1@gmail.com', 'user0pass')
+User.log_in('user1@gmail.com', 'user0pass')
+
+driverShaheb1 = Driver("Montu", "monto@gmail.com", 'omontujawkoi', 65, 4577)
+result = license_authority.validate_license(driverShaheb1.email, driverShaheb1.license)
+print(result)
+driverShaheb1.take_driving_test()
 
 #     def register_a_vehicle(self, vehicle_type, license_plate, rate):
 #         if self.valid_driver is True:
