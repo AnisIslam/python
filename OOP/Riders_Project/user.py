@@ -1,8 +1,8 @@
 import hashlib
 from random import random, randint
 from brta import BRTA
-# from vehicles import Bike, Car, Cng
-# from ride_manager import uber
+from vehicle import Bike, Car, Cng
+from ride_manager import uber
 license_authority = BRTA()
 
 
@@ -74,32 +74,38 @@ class Driver(User):
         else: 
             self.license = result
             self.valid_driver = True
+# user1 = User('user 1', 'user1@gmail.com', 'user0pass')
+# User.log_in('user1@gmail.com', 'user0pass')
+
+# driverShaheb1 = Driver("Montu", "monto@gmail.com", 'omontujawkoi', 65, 4577)
+# result = license_authority.validate_license(driverShaheb1.email, driverShaheb1.license)
+# print(result)
+# driverShaheb1.take_driving_test
+
+    def register_a_vehicle(self, vehicle_type, license_plate, rate):
+        if self.valid_driver is True:
+            if vehicle_type == 'car':
+                new_vehicle = Car(vehicle_type, license_plate, rate, self )
+                uber.add_a_vehicle(vehicle_type, new_vehicle)
+            elif vehicle_type == 'bike':
+                new_vehicle = Bike(vehicle_type, license_plate, rate, self )
+                uber.add_a_vehicle(vehicle_type, new_vehicle)
+            else:
+                new_vehicle = Cng(vehicle_type, license_plate, rate, self)
+                uber.add_a_vehicle(vehicle_type, new_vehicle)
+        else:
+            print('You are not a valid driver')
+
+#     def start_a_trip(self, destination, fare):
+#         self.earning += fare
+#         self.location = destination
 user1 = User('user 1', 'user1@gmail.com', 'user0pass')
 User.log_in('user1@gmail.com', 'user0pass')
 
 driverShaheb1 = Driver("Montu", "monto@gmail.com", 'omontujawkoi', 65, 4577)
 result = license_authority.validate_license(driverShaheb1.email, driverShaheb1.license)
 print(result)
-driverShaheb1.take_driving_test()
-
-#     def register_a_vehicle(self, vehicle_type, license_plate, rate):
-#         if self.valid_driver is True:
-#             if vehicle_type == 'car':
-#                 new_vehicle = Car(vehicle_type, license_plate, rate, self )
-#                 uber.add_a_vehicle(vehicle_type, new_vehicle)
-#             elif vehicle_type == 'bike':
-#                 new_vehicle = Bike(vehicle_type, license_plate, rate, self )
-#                 uber.add_a_vehicle(vehicle_type, new_vehicle)
-#             else:
-#                 new_vehicle = Cng(vehicle_type, license_plate, rate, self)
-#                 uber.add_a_vehicle(vehicle_type, new_vehicle)
-#         else:
-#             print('You are not a valid driver')
-
-#     def start_a_trip(self, destination, fare):
-#         self.earning += fare
-#         self.location = destination
-
+driverShaheb1.take_driving_test
 
 # rider1 = Rider('rider1', 'rider1@gmail.com', 'rider1', randint(0, 30), 5000)
 # rider2 = Rider('rider2', 'rider2@gmail.com', 'rider2', randint(0, 30), 5000)
