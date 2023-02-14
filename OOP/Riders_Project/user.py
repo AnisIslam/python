@@ -3,7 +3,6 @@ from random import random, randint
 # from brta import BRTA
 # from vehicles import Bike, Car, Cng
 # from ride_manager import uber
-
 # license_authority = BRTA()
 
 
@@ -43,23 +42,23 @@ User.log_in('user1@gmail.com', 'user0pass')
 #         # print('password found', stored_password)
 
 
-# class Rider(User):
-#     def __init__(self, name, email, password, location, balance) -> None:
-#         self.location = location
-#         self.balance = balance
-#         super().__init__(name, email, password)
+class Rider(User):
+    def __init__(self, name, email, password, location, balance) -> None:
+        self.location = location
+        self.balance = balance
+        super().__init__(name, email, password)
 
-#     def set_location(self, location):
-#         self.location = location
+    def set_location(self, location):
+        self.location = location
 
-#     def get_location(self):
-#         return self.location
+    def get_location(self):
+        return self.location
 
-#     def request_trip(self, destination):
-#         pass
+    def request_trip(self, destination):
+        pass
 
-#     def start_a_trip(self, fare):
-#         self.balance -= fare
+    def start_a_trip(self, fare):
+        self.balance -= fare
 
 # class Driver(User):
 #     def __init__(self, name, email, password, location, license) -> None:
