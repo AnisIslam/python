@@ -16,7 +16,7 @@ class RideManager:
     def get_available_cars(self):
         return self.__available_cars
 
-    def find_a_vehicle(self, rider, vehicle_type, destination):
+    def find_a_vehicle(self, rider, vehicle_type, destination): #search a vehicle
         print('looking for a car')
         if vehicle_type == 'car':
             if len(self.__available_cars) == 0:
@@ -28,5 +28,6 @@ class RideManager:
                     print('find a match for you')
                     return True
             print('looping done')
+            print('Loop finished')
 
 uber = RideManager()
