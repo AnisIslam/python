@@ -11,8 +11,8 @@ class User:
         self.name = name
         self.email = email
         pwd_encrypted = hashlib.md5(password.encode()).hexdigest()
-        with open('users.txt', 'w') as file:
-            file.write(f'{email} {pwd_encrypted}')
+        with open('users.txt', 'a') as file:
+            file.write(f'{email} {pwd_encrypted}\n')
         file.close()
         print(self.name, 'user created')
 
