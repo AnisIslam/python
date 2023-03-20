@@ -3,6 +3,11 @@ from random import random, randint
 from brta import BRTA
 from vehicle import Bike, Car, Cng
 from rideManager import uber
+
+class UserAlreadyExists(Exception):
+    def __init__(self, email, *args: object) -> None:
+        print(f'User: {email} already exists.')
+        super().__init__(*args)
 license_authority = BRTA()
 
 
@@ -10,18 +15,20 @@ class User:
     def __init__(self, name, email, password) -> None:
         self.name = name
         self.email = email
-
+        pwd_encrypted = hashlib.md5(password.encode()).hexdigest()
+        already_exists = False
           #check duplicate mail user
         with open('users.txt', 'r') as file:
             if email in file.read():
-                print(f'User: {email} already exists.')
+                already_exists = True
+                
+                # print(f'User: {email} already exists.')
         file.close()
-        pwd_encrypted = hashlib.md5(password.encode()).hexdigest()
-      
-        with open('users.txt', 'a') as file:
-            file.write(f'{email} {pwd_encrypted}\n')
-        file.close()
-        print(self.name, 'user created')
+        if already_exists == False:
+            with open('users.txt', 'a') as file:
+                file.write(f'{email} {pwd_encrypted}\n')
+            file.close()
+        # print(self.name, 'user created')
 
     @staticmethod
     def log_in(email, password):
@@ -39,15 +46,7 @@ class User:
         else:
             print('invalid user')
             return False
-        # file.close()
-        # print('Password found', stored_password)
-
-
-
-#             return False
-#         # print('password found', stored_password)
-
-
+       
 class Rider(User):
     def __init__(self, name, email, password, location, balance) -> None:
         self.location = location
@@ -78,16 +77,10 @@ class Driver(User):
         result = license_authority.take_driving_test(self.email)
         if result == False:
             print('Sorry WRONG!, try again')
+            self.license = None
         else: 
             self.license = result
             self.valid_driver = True
-# user1 = User('user 1', 'user1@gmail.com', 'user0pass')
-# User.log_in('user1@gmail.com', 'user0pass')
-
-# driverShaheb1 = Driver("Montu", "monto@gmail.com", 'omontujawkoi', 65, 4577)
-# result = license_authority.validate_license(driverShaheb1.email, driverShaheb1.license)
-# print(result)
-# driverShaheb1.take_driving_test
 
     def register_a_vehicle(self, vehicle_type, license_plate, rate):
         if self.valid_driver is True:
@@ -103,9 +96,6 @@ class Driver(User):
         else:
             print('You are not a valid driver')
 
-#     def start_a_trip(self, destination, fare):
-#         self.earning += fare
-#         self.location = destination
 user1 = User('user 1', 'user1@gmail.com', 'user0pass')
 User.log_in('user1@gmail.com', 'user0pass')
 
@@ -117,22 +107,10 @@ driverShaheb1.take_driving_test
 rider1 = Rider('rider1', 'rider1@gmail.com', 'rider1', randint(0, 30), 5000)
 rider2 = Rider('rider2', 'rider2@gmail.com', 'rider2', randint(0, 30), 5000)
 rider3 = Rider('rider3', 'rider3@gmail.com', 'rider3', randint(0, 30), 5000)
-
-driver1 = Driver('driver1', 'driver1@gmail.com', 'driver1', randint(0, 30), 5645)
-driver1.take_driving_test()
-driver1.register_a_vehicle('car', 1245, 10)
-
-driver2 = Driver('driver2', 'driver2@gmail.com', 'driver2', randint(0, 30), 5645)
-driver2.take_driving_test()
-driver2.register_a_vehicle('car', 1245, 10)
-
-driver3 = Driver('driver3', 'driver3@gmail.com', 'driver3', randint(0, 30), 5645)
-driver3.take_driving_test()
-driver3.register_a_vehicle('car', 2145, 10)
-
-driver4 = Driver('driver4', 'driver4@gmail.com', 'driver4', randint(0, 30), 5645)
-driver4.take_driving_test()
-driver4.register_a_vehicle('car', 3245, 10)
+for i in range(0,100):
+    driver1 = Driver(f'driver{i}', f'driver{i}@gmail.com', f'driver{i}', randint(0, 100), randint(1000, 5999))
+    driver1.take_driving_test()
+    driver1.register_a_vehicle('car', randint(10000, 59999), 10)
 
 print(uber.get_available_cars())
 uber.find_a_vehicle(rider1, 'car', 90)
