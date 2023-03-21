@@ -25,13 +25,15 @@ class RideManager:
             for car in self.__available_cars:
                 print('potential', rider.location, car.driver.location)
                 if abs(rider.location - car.driver.location) < 10:
+                    distance = abs(rider.location - destination)
+                    fare = distance*car.rate
                     if car.status == 'available':
                         car.status == 'unavailable'
-                        print('Available Cars now ', len(self.__available_cars))
+                        # print('Available Cars now ', len(self.__available_cars))
                         self.__available_cars.remove(car)
-                        print('Available Cars now ', len(self.__available_cars))
+                        # print('Available Cars now ', len(self.__available_cars))
                         
-                        print('find a match for you')
+                        print('find a match for you for', fare)
                         return True
                     
             print('looping done')
