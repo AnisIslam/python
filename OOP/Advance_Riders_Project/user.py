@@ -59,19 +59,26 @@ class Rider(User):
     def get_location(self):
         return self.location
 
+    def get_trip_history(self):
+        return self.__trip_history
+    
     def request_trip(self, destination):
         pass
 
-    def start_a_trip(self, fare):
+    def start_a_trip(self, fare, trip_info):
+        # print(f'A trip started for {self.name}')
         self.balance -= fare
+        self.__trip_history.append(trip_info)
 
 class Driver(User):
     def __init__(self, name, email, password, location, license) -> None:
         super().__init__(name, email, password)
         self.location = location
+        self.__trip_history = []
         self.license = license
         self.valid_driver = license_authority.validate_license(email, license)
         self.earning = 0
+        self.vehicle = None
 
     def take_driving_test(self):
         result = license_authority.take_driving_test(self.email)
@@ -95,14 +102,19 @@ class Driver(User):
                 uber.add_a_vehicle(vehicle_type, new_vehicle)
         else:
             print('You are not a valid driver')
+    def start_a_trip(self, destination, fare, trip_info):
+        self.earning += fare
+        self.location = destination
+        self.__trip_history.append(trip_info)
 
-user1 = User('user 1', 'user1@gmail.com', 'user0pass')
-User.log_in('user1@gmail.com', 'user0pass')
 
-driverShaheb1 = Driver("Montu", "monto@gmail.com", 'omontujawkoi', 65, 4577)
-result = license_authority.validate_license(driverShaheb1.email, driverShaheb1.license)
-print(result)
-driverShaheb1.take_driving_test
+# user1 = User('user 1', 'user1@gmail.com', 'user0pass')
+# User.log_in('user1@gmail.com', 'user0pass')
+
+# driverShaheb1 = Driver("Montu", "monto@gmail.com", 'omontujawkoi', 65, 4577)
+# result = license_authority.validate_license(driverShaheb1.email, driverShaheb1.license)
+# print(result)
+# driverShaheb1.take_driving_test
 
 rider1 = Rider('rider1', 'rider1@gmail.com', 'rider1', randint(0, 30), 5000)
 rider2 = Rider('rider2', 'rider2@gmail.com', 'rider2', randint(0, 30), 5000)
@@ -113,5 +125,7 @@ for i in range(0,100):
     driver1.register_a_vehicle('car', randint(10000, 59999), 10)
 
 print(uber.get_available_cars())
-uber.find_a_vehicle(rider1, 'car', 90)
+uber.find_a_vehicle(rider1, 'car', randint(1, 100))
+
+print(rider1.get_trip_history())
 #driver overwrite

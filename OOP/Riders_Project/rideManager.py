@@ -1,6 +1,8 @@
 class RideManager:
     def __init__(self) -> None:
         print('Ride manager activated')
+        self.__income = 0
+        self.__trip_history = []
         self.__available_cars = []
         self.__available_bikes = []
         self.__available_cng = []
@@ -15,6 +17,12 @@ class RideManager:
 
     def get_available_cars(self):
         return self.__available_cars
+    def total_income(self):
+        return self.__income
+
+    def trip_history(self):
+        return self.__trip_history
+
 
     def find_a_vehicle(self, rider, vehicle_type, destination): #search a vehicle
         print('looking for a car')
